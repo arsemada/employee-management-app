@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: employee_app
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: employee_user
+      POSTGRES_PASSWORD: employee_password
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5332:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:
